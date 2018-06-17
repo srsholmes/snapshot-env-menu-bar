@@ -13,6 +13,7 @@
 		764B294E20D704460084CBB5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 764B294C20D704460084CBB5 /* Main.storyboard */; };
 		764B295A20D704460084CBB5 /* snapshot_env_menu_barTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764B295920D704460084CBB5 /* snapshot_env_menu_barTests.swift */; };
 		764B296520D704460084CBB5 /* snapshot_env_menu_barUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764B296420D704460084CBB5 /* snapshot_env_menu_barUITests.swift */; };
+		76A4C61020D711E00011DD98 /* SnapshotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A4C60F20D711E00011DD98 /* SnapshotViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		764B296020D704460084CBB5 /* snapshot-env-menu-barUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "snapshot-env-menu-barUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		764B296420D704460084CBB5 /* snapshot_env_menu_barUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = snapshot_env_menu_barUITests.swift; sourceTree = "<group>"; };
 		764B296620D704460084CBB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76A4C60F20D711E00011DD98 /* SnapshotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SnapshotViewController.swift; path = "snapshot-env-menu-bar/SnapshotViewController.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 		764B293A20D704450084CBB5 = {
 			isa = PBXGroup;
 			children = (
+				76A4C60F20D711E00011DD98 /* SnapshotViewController.swift */,
 				764B294520D704450084CBB5 /* snapshot-env-menu-bar */,
 				764B295820D704460084CBB5 /* snapshot-env-menu-barTests */,
 				764B296320D704460084CBB5 /* snapshot-env-menu-barUITests */,
@@ -255,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				764B294920D704450084CBB5 /* ViewController.swift in Sources */,
+				76A4C61020D711E00011DD98 /* SnapshotViewController.swift in Sources */,
 				764B294720D704450084CBB5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
