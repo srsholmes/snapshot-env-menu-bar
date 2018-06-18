@@ -2,9 +2,8 @@ import Cocoa
 import Foundation
 
 
-func launch(path: String, dir: String) {
-  let arguments = ["-d", dir, "-p", "3000", "-o", "build", "-b", "npm run build", "-c", "develop"]
-  let task = Process.launchedProcess(launchPath: path, arguments: arguments)
+func launch(path: String, args: [String]) {
+  let task = Process.launchedProcess(launchPath: path, arguments: args)
   task.waitUntilExit()
 }
 
@@ -33,40 +32,14 @@ func bash(command: String, arguments: [String]) -> String {
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
   let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
   let popover = NSPopover()
-
-  @IBAction func selectFolder(sender: AnyObject) {
-    let openPanel = NSOpenPanel()
-    openPanel.allowsMultipleSelection = false
-    openPanel.canChooseDirectories = true
-    openPanel.canCreateDirectories = false
-    openPanel.canChooseFiles = false
-    openPanel.begin { (result) -> Void in
-      if result.rawValue == NSFileHandlingPanelOKButton {
-        let chosenDirectory: String = openPanel.url!.path
-        let nodePath = bash(command: "which", arguments: ["node"]);
-        let snapshotBin = nodePath.replacingOccurrences(of: "bin/node", with: "bin/snapshot-env", options: .literal, range: nil)
-        launch(path: snapshotBin, dir: chosenDirectory)
-      }
-    }
-  }
-
-  func menu() {
-    let menu = NSMenu()
-    menu.addItem(NSMenuItem(title: "Open Folder", action: #selector(AppDelegate.selectFolder), keyEquivalent: "o"))
-    menu.addItem(NSMenuItem.separator())
-    menu.addItem(NSMenuItem(title: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
-    statusItem.menu = menu
-  }
 
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     if let button = statusItem.button {
       button.image = NSImage(named: NSImage.Name("StatusBarButtonImage"))
       button.action = #selector(togglePopover(_:))
-//      button.action = #selector(AppDelegate.selectFolder)
     }
     popover.contentViewController = SnapshotViewController.freshController()
   }
