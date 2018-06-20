@@ -1,7 +1,6 @@
 import Cocoa
 import Foundation
 
-
 func launch(path: String, args: [String]) {
   let task = Process.launchedProcess(launchPath: path, arguments: args)
   task.waitUntilExit()

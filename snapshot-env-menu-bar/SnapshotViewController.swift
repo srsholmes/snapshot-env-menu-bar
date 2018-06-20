@@ -24,10 +24,6 @@ class SnapshotViewController: NSViewController {
 extension SnapshotViewController {
   @IBAction func selectFolder(sender: AnyObject) {
     let openPanel = NSOpenPanel()
-    print(self.portTextField.stringValue)
-    print(self.outputFolderTextField.stringValue)
-    print(self.commitTextField.stringValue)
-    print(self.buildTextField.stringValue)
     openPanel.allowsMultipleSelection = false
     openPanel.canChooseDirectories = true
     openPanel.canCreateDirectories = false
@@ -37,7 +33,6 @@ extension SnapshotViewController {
         let chosenDirectory: String = openPanel.url!.path
         let nodePath = bash(command: "which", arguments: ["node"]);
         let snapshotBin = nodePath.replacingOccurrences(of: "bin/node", with: "bin/snapshot-env", options: .literal, range: nil)
-
         let arguments = [
           "-d",
           chosenDirectory,
