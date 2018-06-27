@@ -1,20 +1,8 @@
 import Cocoa
 import Foundation
 
-func launch(path: String, args: [String]) {
-  let task = Process.launchedProcess(launchPath: path, arguments: args)
-  task.waitUntilExit()
-}
 
-func shell(launchPath: String, arguments: [String]) -> String {
-  let task = Process()
-  task.launchPath = launchPath
-  task.arguments = arguments
-
-  let pipe = Pipe()
-  task.standardOutput = pipe
-  task.launch()
-
+func getPipeData(pipe: Pipe) -> String {
   let data = pipe.fileHandleForReading.readDataToEndOfFile()
   let output = String(data: data, encoding: String.Encoding.utf8)!
   if output.count > 0 {
@@ -24,9 +12,20 @@ func shell(launchPath: String, arguments: [String]) -> String {
   return output
 }
 
-func bash(command: String, arguments: [String]) -> String {
-  let whichPathForCommand = shell(launchPath: "/bin/bash", arguments: ["-l", "-c", "which \(command)"])
-  return shell(launchPath: whichPathForCommand, arguments: arguments)
+func shell(launchPath: String, args: [String]) -> String {
+  let task = Process()
+  task.launchPath = launchPath
+  task.arguments = args
+  let pipe = Pipe()
+  task.standardOutput = pipe
+  task.launch()
+  return getPipeData(pipe: pipe)
+}
+
+
+func bash(command: String, args: [String]) -> String {
+  let whichPathForCommand = shell(launchPath: "/bin/bash", args: ["-l", "-c", "which \(command)"])
+  return shell(launchPath: whichPathForCommand, args: args)
 }
 
 @NSApplicationMain
