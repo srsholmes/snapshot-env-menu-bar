@@ -17,7 +17,7 @@ class SnapshotViewController: NSViewController {
   }
 
   @IBOutlet weak var portTextField: NSTextField!
-  @IBOutlet weak var outputFolderTextField: NSTextView!
+  @IBOutlet weak var outputFolderTextField: NSTextField!
   @IBOutlet weak var commitTextField: NSTextField!
   @IBOutlet weak var buildTextField: NSTextField!
   @IBOutlet weak var appOutput: NSTextField!
@@ -56,30 +56,30 @@ extension SnapshotViewController {
         let chosenDirectory: String = openPanel.url!.path
         let nodePath = bash(command: "which", args: ["node"]);
         let snapshotBin = nodePath.replacingOccurrences(of: "bin/node", with: "bin/snapshot-env", options: .literal, range: nil)
-//        let args = [
-//          "-d",
-//          chosenDirectory,
-//          "-p",
-//          self.portTextField.stringValue,
-//          "-o",
-//          self.outputFolderTextField.stringValue,
-//          "-b",
-//          self.buildTextField.stringValue,
-//          "-c",
-//          self.commitTextField.stringValue
-//        ]
         let args = [
           "-d",
           chosenDirectory,
           "-p",
-          "3000",
+          self.portTextField.stringValue,
           "-o",
-          "build",
+          self.outputFolderTextField.stringValue,
           "-b",
-          "npm run build",
+          self.buildTextField.stringValue,
           "-c",
-          "develop"
+          self.commitTextField.stringValue
         ]
+//        let args = [
+//          "-d",
+//          chosenDirectory,
+//          "-p",
+//          "3000",
+//          "-o",
+//          "build",
+//          "-b",
+//          "npm run build",
+//          "-c",
+//          "develop"
+//        ]
         self.launch(launchPath: snapshotBin, args: args)
       }
     }
